@@ -3,7 +3,7 @@ import './App.scss';
 
 import usersFromServer from './api/users';
 import todosFromServer from './api/todos';
-import { Todo } from './types/Todo';
+import { Todo } from './components/types/Todo';
 import { TodoList } from './components/TodoList';
 
 export const App = () => {
@@ -31,13 +31,13 @@ export const App = () => {
       return;
     }
 
-    const newTodo = {
-      id: Math.max(...todos.map(todo => todo.id)) + 1,
-      title: title.trim(),
-      completed: false,
-      userId,
-      user: usersFromServer.find(user => user.id === userId) || null,
-    };
+const newTodo = {
+  id: todos.length > 0 ? Math.max(...todos.map(todo => todo.id)) + 1 : 1,
+  title: title.trim(),
+  completed: false,
+  userId,
+  user: usersFromServer.find(user => user.id === userId) || null,
+};
 
     setTodos(currentTodos => [...currentTodos, newTodo]);
 
